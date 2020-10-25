@@ -57,17 +57,12 @@ class Demo extends Simulation {
 			.check(css("a:contains('${searchComputerName}')", "href").saveAs("notebooksURL")))
 		.pause(1)
 		.exec(http("Select")
-			.get("${notebooksURL}"))
+			.get("${notebooksURL}")
+		.check(css(" input[class=\"button-1 add-to-cart-button\"]", "data-productid").saveAs("productNumber")))
 		.pause(1)
-		// Input of product name
-	/*	.exec(http("Input of product name")
-			.post("/addproducttocart/catalog/4/1/1")
-			.check(substring("apple"))
-			.headers(headers_17))*/
-		.pause(3)
-		// Add product from product detail page
+			// Add product from product detail page
 		.exec(http("Add product from product detail page")
-			.post("/addproducttocart/details/4/1")
+			.post("/addproducttocart/details/${productNumber}/1")
 			.check(status.not(500))
 			.headers(headers_32)
 			.formParam("addtocart_4.EnteredQuantity", "2")
