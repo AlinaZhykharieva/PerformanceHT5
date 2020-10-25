@@ -56,7 +56,7 @@ class Demo extends Simulation {
 			.get("/?f=${searchCriterion}")
 			.check(css("a:contains('${searchComputerName}')", "href").saveAs("notebooksURL")))
 		.pause(1)
-		.exec(http("Select")
+		.exec(http("Get PDP")
 			.get("${notebooksURL}")
 		.check(css(" input[class=\"button-1 add-to-cart-button\"]", "data-productid").saveAs("productNumber")))
 		.pause(1)
@@ -65,7 +65,7 @@ class Demo extends Simulation {
 			.post("/addproducttocart/details/${productNumber}/1")
 			.check(status.not(500))
 			.headers(headers_32)
-			.formParam("addtocart_4.EnteredQuantity", "2")
+			.formParam("addtocart_${productNumber}.EnteredQuantity", "2")
 			.formParam("__RequestVerificationToken", "CfDJ8NJzpPdWJDZGtf_4GVVpZ2lTmab6NpGA9EGIK5dkT01QzcG6hJGRFtVegC00Z5CQhViBJ8Of6E9QUTkF0nouBJU82XKosbeXoG2VYqaIrU8yWGLaAFfb1CIF8VWEXcRytPOyHw2jUyeKpyXIhu4x6cY"))
 		.pause(2)
 		// Get cart
