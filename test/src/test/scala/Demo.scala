@@ -54,10 +54,10 @@ class Demo extends Simulation {
 		.feed(feeder)
 		.exec(http("Search")
 			.get("/?f=${searchCriterion}")
-			.check(css("a:contains('${searchComputerName}')", "href").saveAs("notebooksURL")))
+			.check(css("a:contains('${searchProductName}')", "href").saveAs("productURL")))
 		.pause(1)
 		.exec(http("Get PDP")
-			.get("${notebooksURL}")
+			.get("${productURL}")
 		.check(css(" input[class=\"button-1 add-to-cart-button\"]", "data-productid").saveAs("productNumber")))
 		.pause(1)
 			// Add product from product detail page
